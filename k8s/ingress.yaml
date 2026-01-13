@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: api-ingress
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/health-check-path: "/beautiful_unicorn/health"
+    nginx.ingress.kubernetes.io/health-check-interval: "10s"
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /beautiful_unicorn(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: api-svc
+            port:
+              number: 8000
