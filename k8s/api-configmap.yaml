@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-configmap
+  namespace: default
+data:
+  MYSQL_HOST: "mysql-svc"
+  MYSQL_PORT: "3306"
+  MYSQL_DB: "clients"
+  ROOT_PATH: "/beautiful_unicorn"
